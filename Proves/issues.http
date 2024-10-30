@@ -1,0 +1,55 @@
+@regirapi_HostAddress = http://localhost:5208
+
+
+### Crear una nova incidència
+POST {{regirapi_HostAddress}}/api/Issues
+Content-Type: application/json
+
+{
+  "name": "Implementar autenticació",
+  "description": "Implementar sistema d'autenticació per a l'aplicació",
+  "type": "Feature",
+  "priority": 1,
+  "status": "Pending",
+  "projectId": 1,
+  "userId": 1
+}
+
+### Obtenir totes les incidències
+GET {{regirapi_HostAddress}}/api/Issues
+
+### Obtenir una incidència per ID
+GET {{regirapi_HostAddress}}/api/Issues/1
+
+### Actualitzar una incidència
+PUT {{regirapi_HostAddress}}/api/Issues/1
+Content-Type: application/json
+
+{
+  "name": "Implementar autenticació",
+  "description": "Implementar sistema d'autenticació per a l'aplicació amb OAuth",
+  "type": "Feature",
+  "priority": 1,
+  "status": "In Progress",
+  "projectId": 1,
+  "userId": 1
+}
+
+### Eliminar una incidència
+DELETE {{regirapi_HostAddress}}/api/Issues/1
+
+
+
+### Crear una nova incidència amb projecte i usuari opcionals
+POST {{regirapi_HostAddress}}/api/Issues
+Content-Type: application/json
+
+{
+  "name": "Implementar autenticació",
+  "description": "Implementar sistema d'autenticació per a l'aplicació",
+  "type": "Feature",
+  "priority": 1,
+  "status": "Pending",
+  "projectId": 1,
+  "userId": 1
+}

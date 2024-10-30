@@ -1,0 +1,32 @@
+@regirapi_HostAddress = http://localhost:5208
+
+
+### Crear un nou usuari
+POST {{regirapi_HostAddress}}/api/Users
+Content-Type: application/json
+
+{
+  "name": "Joan Garcia",
+  "email": "joan.garcia@example.com",
+  "role": "Developer"
+}
+
+### Obtenir tots els usuaris
+GET {{regirapi_HostAddress}}/api/Users
+
+### Obtenir un usuari per ID
+GET {{regirapi_HostAddress}}/api/Users/1
+
+### Actualitzar un usuari
+PUT {{regirapi_HostAddress}}/api/Users/1
+Content-Type: application/json
+
+{
+  "name": "Joan Garcia Actualitzat",
+  "email": "joan.garcia@example.com",
+  "role": "Senior Developer"
+}
+
+### Eliminar un usuari
+DELETE {{regirapi_HostAddress}}/api/Users/2
+

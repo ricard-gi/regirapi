@@ -1,0 +1,31 @@
+
+@regirapi_HostAddress = http://localhost:5208
+
+
+
+### Crear un nou projecte
+POST {{regirapi_HostAddress}}/api/Projects
+Content-Type: application/json
+
+{
+  "name": "Projecte REGIRA",
+  "description": "Aplicació de gestió de tasques similar a JIRA"
+}
+
+### Obtenir tots els projectes
+GET {{regirapi_HostAddress}}/api/Projects
+
+### Obtenir un projecte per ID
+GET {{regirapi_HostAddress}}/api/Projects/1
+
+### Actualitzar un projecte
+PUT {{regirapi_HostAddress}}/api/Projects/1
+Content-Type: application/json
+
+{
+  "name": "Projecte REGIRA Actualitzat",
+  "description": "Actualització del projecte de gestió de tasques"
+}
+
+### Eliminar un projecte
+DELETE {{regirapi_HostAddress}}/api/Projects/1
