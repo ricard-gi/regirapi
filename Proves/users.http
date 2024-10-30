@@ -6,8 +6,8 @@ POST {{regirapi_HostAddress}}/api/Users
 Content-Type: application/json
 
 {
-  "name": "Joan Garcia",
-  "email": "joan.garcia@example.com",
+  "name": "Pere Martorell",
+  "email": "pere.martorell@example.com",
   "role": "Developer"
 }
 

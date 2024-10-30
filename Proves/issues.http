@@ -53,3 +53,15 @@ Content-Type: application/json
   "projectId": 1,
   "userId": 1
 }
+
+
+
+
+### Canviar l'usuari assignat a una incidència
+PUT {{regirapi_HostAddress}}/api/Issues/2/change-user
+Content-Type: application/json
+
+{
+  "userId": 3
+}
+

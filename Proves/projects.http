@@ -29,3 +29,7 @@ Content-Type: application/json
 
 ### Eliminar un projecte
 DELETE {{regirapi_HostAddress}}/api/Projects/1
+
+
+### Obtenir un projecte amb issues agrupades per prioritat
+GET {{regirapi_HostAddress}}/api/Projects/1/issues-grouped

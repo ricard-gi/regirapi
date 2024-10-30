@@ -103,5 +103,61 @@ namespace regirapi.Controllers
         {
             return _context.Projects.Any(e => e.Id == id);
         }
+
+
+
+        [HttpGet("{id}/issues-grouped")]
+        public async Task<ActionResult<ProjectWithGroupedIssuesDto>> GetProjectWithGroupedIssues(int id)
+        {
+            var project = await _context.Projects
+                .Include(p => p.Issues)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            // Agrupem les issues per prioritat i les assignem al DTO
+            var projectDto = new ProjectWithGroupedIssuesDto
+            {
+                Id = project.Id,
+                Name = project.Name,
+                Description = project.Description,
+                HighPriorityIssues = project.Issues
+                    .Where(i => i.Priority == 1)
+                    .Select(i => new IssueDto
+                    {
+                        Id = i.Id,
+                        Name = i.Name,
+                        Description = i.Description,
+                        Type = i.Type,
+                        Status = i.Status
+                    }).ToList(),
+                MediumPriorityIssues = project.Issues
+                    .Where(i => i.Priority == 2)
+                    .Select(i => new IssueDto
+                    {
+                        Id = i.Id,
+                        Name = i.Name,
+                        Description = i.Description,
+                        Type = i.Type,
+                        Status = i.Status
+                    }).ToList(),
+                LowPriorityIssues = project.Issues
+                    .Where(i => i.Priority == 3)
+                    .Select(i => new IssueDto
+                    {
+                        Id = i.Id,
+                        Name = i.Name,
+                        Description = i.Description,
+                        Type = i.Type,
+                        Status = i.Status
+                    }).ToList(),
+            };
+
+            return projectDto;
+        }
+        
     }
 }

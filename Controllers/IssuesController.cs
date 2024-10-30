@@ -24,7 +24,10 @@ namespace regirapi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Issue>>> GetIssues()
         {
-            return await _context.Issues.ToListAsync();
+            return await _context.Issues
+               //      .Include(i => i.Project)  // Carrega la relació amb Project
+               //     .Include(i => i.User)     // Carrega la relació amb User
+                   .ToListAsync();
         }
 
         // GET: api/Issues/5
@@ -158,5 +161,33 @@ namespace regirapi.Controllers
         {
             return _context.Issues.Any(e => e.Id == id);
         }
+
+
+
+        // Endpoint per canviar l'usuari assignat a una incidència
+        [HttpPut("{id}/change-user")]
+        public async Task<IActionResult> ChangeIssueUser(int id, [FromBody] ChangeIssueUserDto dto)
+        {
+            // Busca la Issue per ID
+            var issue = await _context.Issues.FindAsync(id);
+            if (issue == null)
+            {
+                return NotFound("La incidència no existeix.");
+            }
+
+            // Comprova que l'usuari nou existeixi
+            var user = await _context.Users.FindAsync(dto.UserId);
+            if (user == null)
+            {
+                return NotFound("L'usuari especificat no existeix.");
+            }
+
+            // Actualitza l'assignació de la Issue
+            issue.UserId = dto.UserId;
+            await _context.SaveChangesAsync();
+
+            return Ok($"Usuari assignat a la incidència actualitzat a {user.Name}.");
+        }
+        
     }
 }
